@@ -1,0 +1,25 @@
+{
+  "purpose": "第一版与首轮同题同预算对照；仅从初始仓库公开测试选择，先独立执行两次再冻结，不读取隐藏补丁选测试",
+  "tasks": {
+    "psf__requests-5414": ["tests/test_structures.py", "tests/test_hooks.py"],
+    "pytest-dev__pytest-5262": ["testing/test_capture.py"],
+    "pytest-dev__pytest-5631": ["testing/test_collection.py"],
+    "sphinx-doc__sphinx-9367": ["tests/test_util_typing.py"],
+    "sphinx-doc__sphinx-8593": ["tests/test_ext_autodoc.py::test_autodoc_attributes", "tests/test_ext_autodoc.py::test_autodoc_members", "tests/test_ext_autodoc.py::test_autodoc_exclude_members", "tests/test_ext_autodoc.py::test_autodoc_undoc_members", "tests/test_ext_autodoc.py::test_autodoc_imported_members", "tests/test_ext_autodoc.py::test_autodoc_special_members", "tests/test_ext_autodoc.py::test_autodoc_typed_instance_variables", "tests/test_ext_autodoc.py::test_autodoc_typed_inherited_instance_variables"],
+    "psf__requests-2931": ["test_requests.py::TestRequests::test_params_bytes_are_encoded", "test_requests.py::TestRequests::test_prepare_request_with_bytestring_url", "test_requests.py::TestCaseInsensitiveDict"],
+    "pytest-dev__pytest-6202": ["testing/test_terminal.py"],
+    "pytest-dev__pytest-7236": ["testing/test_unittest.py"],
+    "sphinx-doc__sphinx-8056": ["tests/test_ext_napoleon.py"],
+    "sphinx-doc__sphinx-9591": ["tests/test_ext_autodoc.py"]
+  },
+  "public_baseline_exclusions_before_model_runs": {
+    "sphinx-doc__sphinx-8593": {
+      "nodeid": "tests/test_ext_autodoc.py::test_autodoc",
+      "reason": "初始镜像整体构建测试断言warning为空，但sphinx.addnodes报告meta节点重复注册；未改代码单独复现仍失败。原文件1失败66通过。改为显式选择8项成员/变量相关公开测试，不声称通过全文件；不用pytest前缀deselect以免误排除其他成员测试。两组一致，官方裁判不变，预检记录保留。"
+    }
+  },
+  "historical_environment_exclusions": {
+    "psf__requests-1921": "首轮gold控制失败，依赖外部httpbin；保持隔离策略，不做付费模型尝试",
+    "psf__requests-1766": "首轮gold控制失败，依赖外部httpbin；保持隔离策略，不做付费模型尝试"
+  }
+}

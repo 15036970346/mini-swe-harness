@@ -1,0 +1,22 @@
+# 只覆盖评测资源限制；原版 SWE-bench 提示与 Agent 逻辑来自固定上游 commit。
+# 本地控制台/教程使用中文；原始英文题面和基线提示保持原貌以保证可比。
+agent:
+  step_limit: 60
+  cost_limit: 2.0
+  wall_time_limit_seconds: 1800
+environment:
+  timeout: 120
+  pull_timeout: 900
+  container_timeout: 40m
+  run_args: ["--rm", "--platform", "linux/amd64", "--cpus", "2", "--memory", "4g", "--pids-limit", "512", "--network", "mini-eval-internal", "--dns", "127.0.0.1"]
+model:
+  model_name: deepseek/deepseek-flash
+  model_kwargs:
+    api_base: https://api.deepseek.com
+    thinking:
+      type: enabled
+    extra_body:
+      reasoning_effort: max
+    max_tokens: 131072
+    timeout: 300
+    num_retries: 0

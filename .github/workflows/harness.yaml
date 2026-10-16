@@ -1,0 +1,26 @@
+name: Harness 无付费模型测试
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    env:
+      PYTHON_DOTENV_DISABLED: "1"
+      MSWEA_SILENT_STARTUP: "1"
+      LITELLM_LOCAL_MODEL_COST_MAP: "True"
+      MINI_LIVE_RECOVERY_TEST: "0"
+      MINI_HARNESS_DOCKER_TESTS: "0"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -c constraints-harness.txt -e '.[harness-dev]'
+      - run: python study/evaluation/prepare.py --restore-runtime
+      - run: python -m pytest -q tests/harness study/evaluation/test_comparison.py tests/publication
+      - run: python examples/inspect_results.py

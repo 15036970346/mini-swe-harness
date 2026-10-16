@@ -9,6 +9,27 @@ traj.json
 .claude/**
 .vscode/**
 
+# 公开版只纳入源码、测试与审核后的结果摘要。
+.env.*
+!.env.example
+*.api-key
+*.pem
+*.key
+credentials*.json
+secrets*.json
+id_rsa
+id_ed25519
+.netrc
+.runtime/
+artifacts/
+publication-local/
+.aoci/
+aoci*.txt
+.codex/
+*.code-workspace
+.DS_Store
+AGENTS.md.backup.*
+
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
 
